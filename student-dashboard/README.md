@@ -41,6 +41,24 @@ This application implements a clean split between Server Components and Client C
 
 ---
 
+## 🧠 Challenges Faced & Solutions
+
+During development, I ran into a few interesting challenges and solved them as follows:
+
+1. **Framer Motion & React 19 Pointer Capture Bug**:
+   React 19 has some issues with Framer Motion where pointer capture release triggers `releasePointerCapture` errors on unmounted or inactive pointer IDs. To fix this and prevent runtime crashes, I wrote a safe global polyfill inside `DashboardLayout.tsx` that wraps the native method in a `try-catch` block.
+   
+2. **Next.js Hydration Mismatches**:
+   When implementing the live date/time display and loading user preferences (like theme and username) from `localStorage`, I got hydration mismatch warnings because the server and client HTML rendered different initial values. I resolved this by only updating these states inside a `useEffect` hook after the component mounted on the client.
+
+3. **Strict TypeScript Types for Framer Motion**:
+   TypeScript kept complaining about the custom transition configurations (like `type: "spring"`) when declaring variants in separate object variables, since it inferred them as general strings. I resolved this by using `as const` type assertion (e.g. `type: "spring" as const`) to narrow the literal type.
+
+4. **Layout & Independent Scrolling**:
+   Ensuring the sidebar remains fixed on desktop while the bento grid is scrollable was tricky without causing layout shifts. I handled this by applying a rigid `h-screen overflow-hidden` wrapper on the main layout and set `overflow-y-auto` only on the main dashboard container.
+
+---
+
 ## 🗄️ Database Setup (Supabase)
 
 To link this application to your live Supabase database, run the following SQL commands in your **Supabase SQL Editor**:
