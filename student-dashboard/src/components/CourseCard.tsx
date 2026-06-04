@@ -2,16 +2,17 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import * as Icons from "lucide-react";
+import { Clock } from "lucide-react";
 import { Course } from "@/types";
 import { cn } from "@/lib/utils";
+import DynamicIcon from "@/components/DynamicIcon";
 
 interface CourseCardProps {
   course: Course;
   index: number;
+  onClick?: () => void;
 }
 
-// Map of glow gradient classes based on the index to create a colorful, premium dashboard.
 const MESH_GLOW_THEMES = [
   {
     borderHover: "group-hover:border-accent-purple/30",
@@ -43,14 +44,9 @@ const MESH_GLOW_THEMES = [
   },
 ];
 
-export default function CourseCard({ course, index }: CourseCardProps) {
-  // Resolve theme configuration cyclically
+export default function CourseCard({ course, index, onClick }: CourseCardProps) {
   const theme = MESH_GLOW_THEMES[index % MESH_GLOW_THEMES.length];
 
-  // Resolve Lucide icon component dynamically
-  const IconComponent = (Icons as any)[course.icon_name] || Icons.BookOpen;
-
-  // Animation variant for the entrance animation (which is staggered by the parent layout component)
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -67,33 +63,31 @@ export default function CourseCard({ course, index }: CourseCardProps) {
   return (
     <motion.article
       variants={itemVariants}
+      onClick={onClick}
       className="group relative glass-panel rounded-3xl p-6 h-64 flex flex-col justify-between overflow-hidden cursor-pointer"
       whileHover={{
         scale: 1.02,
         transition: { type: "spring", stiffness: 300, damping: 20 },
       }}
     >
-      {/* Dynamic Glow Borders */}
       <div className={cn(
         "absolute inset-0 border border-zinc-800/80 rounded-3xl transition-colors duration-300 pointer-events-none",
         theme.borderHover
       )} />
 
-      {/* Abstract mesh glow backdrop */}
       <div className={cn(
         "absolute inset-0 opacity-40 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none",
         theme.mesh
       )} />
       <div className="grain-overlay" />
 
-      {/* Header section (Icon + Completion Badge) */}
       <div className="relative z-10 flex justify-between items-start">
         <div className={cn(
           "h-12 w-12 rounded-2xl border flex items-center justify-center shadow-inner transition-colors duration-300 shrink-0",
           theme.icon,
           "group-hover:bg-zinc-950/40"
         )}>
-          <IconComponent className="h-6 w-6 stroke-[1.8]" />
+          <DynamicIcon name={course.icon_name} className="h-6 w-6 stroke-[1.8]" />
         </div>
         <span className={cn(
           "text-[9px] uppercase font-black tracking-widest px-2.5 py-1 rounded-full border shadow-sm",
@@ -103,35 +97,32 @@ export default function CourseCard({ course, index }: CourseCardProps) {
         </span>
       </div>
 
-      {/* Body section (Title + Activity timestamp) */}
       <div className="relative z-10 mt-4 space-y-1">
         <h3 className="text-md font-bold tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-300 transition-all duration-200 line-clamp-2 leading-snug">
           {course.title}
         </h3>
         <p className="text-[10px] text-zinc-500 font-semibold tracking-wide flex items-center gap-1">
-          <Icons.Clock className="h-3 w-3 inline" />
+          <Clock className="h-3 w-3 inline" />
           Active this week
         </p>
       </div>
 
-      {/* Footer section (Animated Progress Bar) */}
       <div className="relative z-10 mt-4 space-y-2">
         <div className="flex justify-between items-center text-xs font-semibold">
           <span className="text-zinc-400">Course Progress</span>
           <span className="text-white font-bold">{course.progress}%</span>
         </div>
         
-        {/* Custom Progress Bar Wrapper */}
         <div className="h-2 w-full bg-zinc-950/50 rounded-full overflow-hidden border border-zinc-900/50">
           <motion.div
             className={cn("h-full rounded-full", theme.bar)}
             initial={{ width: 0 }}
             animate={{ width: `${course.progress}%` }}
             transition={{
-              type: "spring" as const,
+              type: "spring",
               stiffness: 80,
               damping: 15,
-              delay: 0.2 + index * 0.1, // Slight stagger to the bar fills as cards load
+              delay: 0.2 + index * 0.1,
             }}
           />
         </div>

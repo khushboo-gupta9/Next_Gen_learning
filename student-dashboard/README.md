@@ -8,7 +8,7 @@ The application leverages **Next.js (App Router)** for fast server rendering, **
 
 ## 🛠️ Tech Stack & Dependencies
 
-- **Framework**: Next.js 15+ (App Router)
+- **Framework**: Next.js (App Router)
 - **Database**: Supabase PostgreSQL
 - **Styling**: Tailwind CSS v4 (with native CSS-first configuration)
 - **Animations**: Framer Motion
@@ -17,7 +17,7 @@ The application leverages **Next.js (App Router)** for fast server rendering, **
 
 ---
 
-## 🏗️ Architectural Choices & Split
+## 🏗️ Architectural Choices & Features
 
 This application implements a clean split between Server Components and Client Components to maximize load performance and interactivity:
 
@@ -26,11 +26,18 @@ This application implements a clean split between Server Components and Client C
 - **`src/lib/supabase.ts`**: Handles credentials verification and server database queries. If credentials are missing or the database query fails, it logs a warning and returns pre-seeded local fallback courses. This allows instant previewing.
 
 ### 2. Client Components (`"use client"`)
-- **`src/components/dashboard/DashboardLayout.tsx`**: Organizes layout wrappers and manages current active tab routing, notifications, and top headers.
-- **`src/components/dashboard/Sidebar.tsx`**: Renders responsive navigation layouts. Controls active navigation animations using Framer Motion's `layoutId` layout animation matching selected states.
-- **`src/components/dashboard/HeroCard.tsx`**: Renders the welcome greeting, current active streak indicator, and XP progression.
-- **`src/components/dashboard/CourseCard.tsx`**: Renders individual course widgets, mapping dynamic icon components and rendering custom-mounted progress bar transitions (animating from `0%` to target).
-- **`src/components/dashboard/ActivityCard.tsx`**: Handles mouse hover coordinate tracking to position tooltips over daily heat-map grid cells showing study duration.
+- **`src/components/DashboardLayout.tsx`**: Organizes layout wrappers and manages current active tab routing, notifications, and top headers. Handles safe `releasePointerCapture` exceptions in React 19.
+- **`src/components/Sidebar.tsx`**: Renders responsive navigation layouts. Controls active navigation animations using Framer Motion's `layoutId` matching selected states.
+- **`src/components/HeroTile.tsx`**: Renders the welcome greeting, current active streak indicator, and XP progression.
+- **`src/components/CourseCard.tsx`**: Renders individual course widgets, mapping dynamic icon components and rendering progress bar transitions.
+- **`src/components/ActivityTile.tsx`**: Handles mouse hover coordinate tracking to position tooltips over daily heat-map grid cells and renders the weekly intensity chart.
+
+### 3. Key Interactivity Features (Internship Polish)
+- **Interactive Syllabus Checklists**: Students can open any course and check/uncheck individual lessons, dynamically updating course progress and earning XP.
+- **Command K Search Palette**: Fully keyboard-accessible navigation menu (using arrow keys and Enter) for quick searching and jumping to pages or courses.
+- **Pomodoro Focus Timer**: A modular timer allowing users to run study focus blocks (or rest breaks) which dynamically logs sessions and updates XP values.
+- **Theme & Profile Persistence**: Settings are persisted to `localStorage` (safely handled on client-side mount) to retain username, study goal, and accent color selections across refreshes.
+- **Dynamic Leaderboard**: The cohort ranking updates dynamically to reflect the user's customized name and live XP score.
 
 ---
 
