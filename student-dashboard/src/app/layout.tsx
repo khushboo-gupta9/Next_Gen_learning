@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Aetheria | Next-Gen Student Learning Dashboard",
   description: "A highly animated, responsive student dashboard prototype styled with modern glassmorphic designs, powered by server-rendered Supabase database courses, and smooth spring physics.",
   keywords: ["Next.js", "Dashboard", "Student Analytics", "Tailwind CSS", "Framer Motion", "Supabase"],
-  authors: [{ name: "Khush Singh" }],
+  authors: [{ name: "Khushboo  Gupta" }],
 };
 
 export default function RootLayout({

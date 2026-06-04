@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bell, 
-  Search, 
-  Terminal, 
+import {
+  Bell,
+  Search,
+  Terminal,
   Info,
   AlertCircle,
   CheckCircle2,
@@ -59,11 +59,11 @@ const NAV_ITEMS: NavItem[] = [
   { id: "settings", label: "Settings", icon_name: "Sliders" },
 ];
 
-export default function DashboardLayout({ 
-  courses, 
-  studyAnalytics, 
-  isFallback, 
-  dbError 
+export default function DashboardLayout({
+  courses,
+  studyAnalytics,
+  isFallback,
+  dbError
 }: DashboardLayoutProps) {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [currentTime, setCurrentTime] = useState("");
@@ -75,7 +75,7 @@ export default function DashboardLayout({
   const [toasts, setToasts] = useState<{ id: string; message: string; type: "success" | "info" | "xp" }[]>([]);
 
   // settings state
-  const [userName, setUserName] = useState("Khush Singh");
+  const [userName, setUserName] = useState("Khushboo Gupta");
   const [dailyGoal, setDailyGoal] = useState(45);
   const [theme, setTheme] = useState<"purple" | "cyan" | "emerald" | "rose">("purple");
 
@@ -204,7 +204,7 @@ export default function DashboardLayout({
     let currentStreak = 0;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     const studyDates = new Set(
       localAnalytics
         .filter((s) => s.minutes_studied > 0)
@@ -266,7 +266,7 @@ export default function DashboardLayout({
           </div>
 
           <div className="flex items-center gap-3">
-            <button 
+            <button
               onClick={() => setIsSearchOpen(true)}
               className="relative hidden sm:block bg-zinc-900/40 border border-zinc-800/80 rounded-xl pl-9 pr-4 py-2 text-xs font-medium text-zinc-500 hover:text-zinc-300 hover:bg-zinc-950/80 focus:outline-none focus:border-accent-purple/50 transition-all duration-300 w-52 text-left cursor-pointer"
             >
@@ -274,14 +274,14 @@ export default function DashboardLayout({
               Quick Search (Ctrl + K)
             </button>
 
-            <button 
+            <button
               onClick={() => setIsSearchOpen(true)}
               className="sm:hidden relative h-9 w-9 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors duration-200 cursor-pointer"
             >
               <Search className="h-4.5 w-4.5" />
             </button>
-            
-            <button 
+
+            <button
               onClick={() => triggerToast("Terminal notifications synced successfully.", "info")}
               className="relative h-9 w-9 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors duration-200 cursor-pointer"
             >
@@ -293,7 +293,7 @@ export default function DashboardLayout({
         </header>
 
         {isFallback && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-8 p-4 rounded-2xl bg-amber-950/20 border border-amber-500/20 text-amber-200 flex items-start gap-3 backdrop-blur-md"
@@ -306,9 +306,9 @@ export default function DashboardLayout({
         )}
 
         {activeTab === "dashboard" && (
-          <BentoGrid 
-            courses={localCourses} 
-            studyAnalytics={localAnalytics} 
+          <BentoGrid
+            courses={localCourses}
+            studyAnalytics={localAnalytics}
             onSelectCourse={(course) => setSelectedCourse(course)}
             userName={userName}
             totalXP={totalXP}
@@ -317,31 +317,31 @@ export default function DashboardLayout({
         )}
 
         {activeTab === "courses" && (
-          <CoursesTab 
-            courses={localCourses} 
+          <CoursesTab
+            courses={localCourses}
             onSelectCourse={(course) => setSelectedCourse(course)}
           />
         )}
 
         {activeTab === "analytics" && (
-          <AnalyticsTab 
-            studyAnalytics={localAnalytics} 
-            onAddStudySession={handleAddStudySession} 
+          <AnalyticsTab
+            studyAnalytics={localAnalytics}
+            onAddStudySession={handleAddStudySession}
             onTriggerToast={triggerToast}
           />
         )}
 
         {activeTab === "settings" && (
-          <SettingsTab 
-            theme={theme} 
-            onThemeChange={handleThemeChange} 
-            userName={userName} 
-            onUserNameChange={handleUserNameChange} 
-            dailyGoal={dailyGoal} 
-            onDailyGoalChange={handleDailyGoalChange} 
-            isFallback={isFallback} 
-            projectID={process.env.NEXT_PUBLIC_SUPABASE_URL?.replace("https://", "").replace(".supabase.co", "") || "snuplrrlfhldzextetxb"} 
-            onTriggerToast={triggerToast} 
+          <SettingsTab
+            theme={theme}
+            onThemeChange={handleThemeChange}
+            userName={userName}
+            onUserNameChange={handleUserNameChange}
+            dailyGoal={dailyGoal}
+            onDailyGoalChange={handleDailyGoalChange}
+            isFallback={isFallback}
+            projectID={process.env.NEXT_PUBLIC_SUPABASE_URL?.replace("https://", "").replace(".supabase.co", "") || "snuplrrlfhldzextetxb"}
+            onTriggerToast={triggerToast}
           />
         )}
       </main>

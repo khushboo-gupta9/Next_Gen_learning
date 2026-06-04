@@ -19,9 +19,9 @@ interface BentoGridProps {
   streak: number;
 }
 
-export default function BentoGrid({ 
-  courses, 
-  studyAnalytics, 
+export default function BentoGrid({
+  courses,
+  studyAnalytics,
   onSelectCourse,
   userName,
   totalXP,
@@ -53,7 +53,7 @@ export default function BentoGrid({
   };
 
   return (
-    <motion.section 
+    <motion.section
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -97,15 +97,15 @@ export default function BentoGrid({
           <div className="space-y-3 my-3">
             {[
               { rank: 1, name: "Aarav Sharma", xp: Math.max(totalXP + 480, 1420), active: true },
-              { rank: 2, name: userName || "Khush Singh", xp: totalXP, active: false, self: true },
+              { rank: 2, name: userName || "Khushboo Gupta", xp: totalXP, active: false, self: true },
               { rank: 3, name: "Ananya Iyer", xp: Math.max(totalXP - 50, 890), active: false },
             ].map((user) => (
-              <div 
-                key={user.rank} 
+              <div
+                key={user.rank}
                 className={cn(
                   "flex items-center justify-between p-2 rounded-xl border transition-all duration-300",
-                  user.self 
-                    ? "bg-accent-rose/10 border-accent-rose/30" 
+                  user.self
+                    ? "bg-accent-rose/10 border-accent-rose/30"
                     : "bg-zinc-950/40 border-zinc-900/60"
                 )}
               >

@@ -32,7 +32,7 @@ export default function BentoSkeleton() {
 
         {/* bento grid skeleton */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
+
           {/* hero tile skeleton */}
           <article className="lg:col-span-2 glass-panel rounded-3xl p-6 relative overflow-hidden h-60 animate-pulse-slow">
             <div className="h-full flex flex-col justify-between relative z-10">

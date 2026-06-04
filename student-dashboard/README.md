@@ -17,7 +17,7 @@ The application leverages **Next.js (App Router)** for fast server rendering, **
 
 ---
 
-## 🏗️ Architectural Choices & Features
+## Architectural Choices & Features
 
 This application implements a clean split between Server Components and Client Components to maximize load performance and interactivity:
 
@@ -41,7 +41,7 @@ This application implements a clean split between Server Components and Client C
 
 ---
 
-## 🧠 Challenges Faced & Solutions
+## Challenges Faced & Solutions
 
 During development, I ran into a few interesting challenges and solved them as follows:
 
@@ -59,7 +59,7 @@ During development, I ran into a few interesting challenges and solved them as f
 
 ---
 
-## 🗄️ Database Setup (Supabase)
+## Database Setup (Supabase)
 
 To link this application to your live Supabase database, run the following SQL commands in your **Supabase SQL Editor**:
 
@@ -100,7 +100,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-api-key
 
 ---
 
-## 🚀 Running Locally
+## Running Locally
 
 1. Install dependencies:
    ```bash

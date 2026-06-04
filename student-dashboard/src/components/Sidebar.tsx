@@ -51,13 +51,13 @@ export default function Sidebar({ activeTab, setActiveTab, items, userName }: Si
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
-                  
-                  <DynamicIcon 
+
+                  <DynamicIcon
                     name={item.icon_name}
                     className={cn(
                       "h-5 w-5 transition-transform duration-200 group-hover:scale-105 shrink-0",
                       isActive ? "text-accent-cyan" : "text-zinc-500 group-hover:text-zinc-400"
-                    )} 
+                    )}
                   />
                   <span className="hidden lg:block tracking-wide">{item.label}</span>
                 </button>
@@ -87,7 +87,7 @@ export default function Sidebar({ activeTab, setActiveTab, items, userName }: Si
       </aside>
 
       {/* mobile bottom nav bar */}
-      <nav 
+      <nav
         className="md:hidden fixed bottom-0 left-0 right-0 h-16 glass-panel border-t border-zinc-900/50 flex items-center justify-around px-4 pb-safe z-50 shadow-2xl"
         aria-label="Mobile Navigation"
       >
@@ -111,12 +111,12 @@ export default function Sidebar({ activeTab, setActiveTab, items, userName }: Si
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <DynamicIcon 
+              <DynamicIcon
                 name={item.icon_name}
                 className={cn(
                   "h-5 w-5 mb-0.5 transition-transform duration-200",
                   isActive ? "text-accent-cyan" : "text-zinc-500"
-                )} 
+                )}
               />
               <span className="text-[9px] uppercase tracking-wider">{item.label}</span>
             </button>
